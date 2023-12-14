@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:07:28 by yusengok          #+#    #+#             */
-/*   Updated: 2023/12/14 14:39:13 by yusengok         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:03:50 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,22 @@
 
 static char	*ft_initialize_buf(size_t buf_size, size_t size);
 static char	*ft_store_buf(int fd, char *stash);
-static void	*ft_truncate_line(char *line, char *stash);
+static char	*ft_truncate_line(char *line, char *stash);
 
 char	*get_next_line(int fd)
 {
 	static char	stash[BUFFER_SIZE + 1];
 	char		*line;
-// ------ Check error cases 
+	
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, 0, 0) < 0)
 		return (NULL);
-// ------ Store buffer in line
-	line = NULL;
-//	line = "hello\nworld";
-	ft_store_buf(fd, stash);
+	line = ft_store_buf(fd, stash);
 	if (!line)
 	{
 		free(line);
 		return (NULL);
 	}
-// ------ Truncate line & store the rest in stash
+// ------ Truncate line & store the remaining in stash
 	ft_truncate_line(line, stash);
 	return (line);
 }
@@ -80,28 +77,21 @@ static char	*ft_store_buf(int fd, char *stash)
 	return (line_buf);
 }
 
-static void	*ft_truncate_line(char *line, char *stash)
+static char	*ft_truncate_line(char *line, char *stash)
 {
 	int		i;
 
 	i = 0;
-	if (line)
-	{
-		while (line[i] != '\n' && line[i] != '\0')
-			i++;
-		if (line[i] == '\0' || line[i + 1] == '\0')
-			return (NULL);
-		ft_memmove(stash, &line[i + 1], ft_strlen(line) - i);
-		if (!stash)
-		{
-			free(line);
-			return (NULL);
-		}
-		stash[BUFFER_SIZE] = '\0';
-		line[i + 1] = '\0';
-		printf("line after: %s", line);
-		return (stash);
-	}
-	free(line);
-	return (NULL);
+//	if (line)
+//	{
+	while (line[i] != '\n' && line[i] != '\0')
+		i++;
+	if (line[i] == '\0' || line[i + 1] == '\0')
+		return (NULL);
+	ft_memmove(stash, &line[i + 1], ft_strlen(line) - i);
+	line[i + 1] = '\0';
+	return (stash);
+//	}
+//	free(line);
+//	return (NULL);
 }
