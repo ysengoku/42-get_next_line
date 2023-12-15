@@ -6,7 +6,7 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:07:25 by yusengok          #+#    #+#             */
-/*   Updated: 2023/12/14 13:55:38 by yusengok         ###   ########.fr       */
+/*   Updated: 2023/12/15 15:06:20 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,28 +111,21 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-// char	*ft_substr(char const *s, unsigned int start, size_t len)
-// {
-// 	char	*substring;
-// 	size_t	i;
-// 	size_t	s_len;
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	char	*dest_ptr;
+	char	*src_ptr;
+	size_t	i;
 
-// 	if (!s)
-// 		return (NULL);
-// 	s_len = ft_strlen((char *)s);
-// 	if (start > s_len)
-// 		return (ft_strdup(""));
-// 	if (start + len > s_len)
-// 		len = s_len - start;
-// 	substring = malloc((len + 1) * sizeof(char));
-// 	if (!substring)
-// 		return (NULL);
-// 	i = 0;
-// 	while (i < len)
-// 	{
-// 		substring[i] = s[start + i];
-// 		i++;
-// 	}
-// 	substring[i] = '\0';
-// 	return (substring);
-// }
+	if (!dest && !src)
+		return (dest);
+	dest_ptr = (char *)dest;
+	src_ptr = (char *)src;
+	i = 0;
+	while (i < n)
+	{
+		dest_ptr[i] = src_ptr[i];
+		i++;
+	}
+	return (dest);
+}
