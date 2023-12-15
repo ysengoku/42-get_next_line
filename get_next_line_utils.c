@@ -12,120 +12,6 @@
 
 #include "get_next_line.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	unsigned char	*ptr;
-	size_t			i;
-
-	if (nmemb * size > INT_MAX || ((int)nmemb < 0 && (int)size < 0))
-		return (NULL);
-	ptr = malloc(nmemb * size);
-	if (!ptr)
-		return (NULL);
-	i = 0;
-	while (i < nmemb * size)
-		ptr[i++] = 0;
-	return (ptr);
-}
-
-t_list	*ft_lstlast(t_list *lst)
-{
-	t_list	*last;
-
-	if (!lst)
-		return (NULL);
-	last = lst;
-	while (last->next)
-	{
-		last = last->next;
-	}
-	return (last);
-}
-
-int	ft_found_newline(t_list *stash)
-{
-	int		i;
-	t_list	*last_node;
-
-	if (!stash)
-		return (0);
-	last_node = ft_lstlast(stash);
-	i = 0;
-	while (last_node->content[i])
-	{
-		if (last_node->content[i] == '\n')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	ft_get_char_count(t_list *stash)
-{
-	int	count;
-	int	i;
-
-	if (!stash)
-		return (0);
-	count = 0;
-	while (stash)
-	{
-		i = 0;
-		while (stash->content[i])
-		{
-			if (stash->content[i] == '\n')
-			{
-				count++;
-				return (count);
-			}
-			count++;
-			i++;
-		}
-		stash = stash->next;
-	}
-	return (count);
-}
-
-/// To create a new function from two
-void	ft_clear_list(t_list **lst)
-{
-	t_list	*tmp;
-
-	if (!lst || !del)
-		return ;
-	while (*lst)
-	{
-		tmp = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		*lst = tmp;
-	}
-	free(*lst);
-	*lst = NULL;
-}
-
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
-{
-	if (!lst || !del)
-		return ;
-	del(lst->content);
-	free(lst);
-}
-/*
-
-char	*ft_initialize_buf(size_t buf_size, size_t size)
-{
-	char	*buf;
-	size_t	i;
-
-	buf = malloc((buf_size + 1) * size);
-	if (!buf)
-		return (NULL);
-	i = 0;
-	while (i < (buf_size + 1) * size)
-		buf[i++] = '\0';
-	return (buf);
-}
-
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
@@ -224,7 +110,6 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-*/
 
 // char	*ft_substr(char const *s, unsigned int start, size_t len)
 // {
