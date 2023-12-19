@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 13:07:33 by yusengok          #+#    #+#             */
-/*   Updated: 2023/12/12 14:27:20 by yusengok         ###   ########.fr       */
+/*   Created: 2023/12/19 16:09:52 by yusengok          #+#    #+#             */
+/*   Updated: 2023/12/19 16:09:53 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *s);
-void	*ft_memmove(void *dest, const void *src, size_t n);
 
 #endif

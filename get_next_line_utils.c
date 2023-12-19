@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 13:07:25 by yusengok          #+#    #+#             */
-/*   Updated: 2023/12/12 14:30:10 by yusengok         ###   ########.fr       */
+/*   Created: 2023/12/19 16:09:35 by yusengok          #+#    #+#             */
+/*   Updated: 2023/12/19 16:09:37 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,31 +108,4 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	substring[i] = '\0';
 	return (substring);
-}
-
-void	*ft_memmove(void *dest, const void *src, size_t n)
-{
-	char		*dest_ptr;
-	const char	*src_ptr;
-	size_t		i;
-
-	if (!dest && !src)
-		return (dest);
-	dest_ptr = (char *)dest;
-	src_ptr = (const char *)src;
-	i = 0;
-	if (dest_ptr > src_ptr)
-	{
-		while (n-- > 0)
-			dest_ptr[n] = src_ptr[n];
-	}
-	else
-	{
-		while (i < n)
-		{
-			dest_ptr[i] = src_ptr[i];
-			i++;
-		}
-	}
-	return (dest);
 }
