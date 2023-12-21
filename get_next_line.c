@@ -6,12 +6,11 @@
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 16:09:42 by yusengok          #+#    #+#             */
-/*   Updated: 2023/12/19 16:16:27 by yusengok         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:29:12 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h> ///////////////////////////////////
 
 static char	*ft_append_buf(char *stash, char *buf);
 //static char	*ft_truncate_line(char *stash, char **line);
@@ -30,14 +29,14 @@ char	*get_next_line(int fd)
 	read_size = 1;
 	if (fd < 0 || BUFFER_SIZE < 0 || read(fd, 0, 0) < 0)
 		return (ft_clear_buffer(&stash), NULL);
-	buf = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buf)
-		return (NULL);
 	while (read_size > 0)
 	{
+		buf = malloc((BUFFER_SIZE + 1) * sizeof(char));
+		if (!buf)
+			return (NULL);
 		read_size = read(fd, buf, BUFFER_SIZE);
 		if ((read_size < 1 && !stash) || read_size == -1)
-			return (ft_clear_buffer(&stash), ft_clear_buffer(&buf), NULL);
+			return (ft_clear_buffer(&stash), ft_clear_buffer(&buf), NULL);	
 		buf[read_size] = '\0';
 		stash = ft_append_buf(stash, buf);
 		if (ft_strchr(stash, '\n'))
@@ -48,8 +47,8 @@ char	*get_next_line(int fd)
 			stash = ft_clean_stash(stash);
 			return (line); 
 		}
+		free(buf);
 	}
-	free(buf);
 	line = ft_strdup(stash);
 	free(stash);
 	stash = NULL;
@@ -66,20 +65,22 @@ static char	*ft_append_buf(char *stash, char *buf)
 	{
 		result = ft_strdup(buf);
 		if (!result)
-			return (ft_clear_buffer(&result), NULL);
+			return (ft_clear_buffer(&result), ft_clear_buffer(&buf), NULL);
 		return (result);
 	}
 	tmp = ft_strdup(stash);
 	if (!tmp)
 	{
 		ft_clear_buffer(&stash);
+		ft_clear_buffer(&buf);
 		return (ft_clear_buffer(&tmp), NULL);
 	}
 	ft_clear_buffer(&stash);
 	result = ft_strjoin(tmp, buf);
 	free(tmp);
 	if (!result)
-	{
+	{	
+		ft_clear_buffer(&buf);
 		free(result);
 		result = NULL;
 	}
@@ -128,6 +129,7 @@ static char	*ft_fetch_line(char *stash)
 	line [j] = '\0';
 	return (line);
 }
+
 static char	*ft_clean_stash(char *stash)
 {
 	ssize_t	i;
