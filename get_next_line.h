@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 16:09:52 by yusengok          #+#    #+#             */
-/*   Updated: 2023/12/19 16:09:53 by yusengok         ###   ########.fr       */
+/*   Created: 2023/11/28 13:07:33 by yusengok          #+#    #+#             */
+/*   Updated: 2023/12/20 13:33:06 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 6
+#  define BUFFER_SIZE 42
 # endif
 
 char	*get_next_line(int fd);

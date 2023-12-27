@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusengok <yusengok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 16:09:35 by yusengok          #+#    #+#             */
-/*   Updated: 2023/12/19 16:09:37 by yusengok         ###   ########.fr       */
+/*   Created: 2023/11/28 13:07:25 by yusengok          #+#    #+#             */
+/*   Updated: 2023/12/20 18:14:39 by yusengok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t	ft_strlen(const char *s)
 
 char	*ft_strchr(const char *s, int c)
 {
-	unsigned int	i;
+	size_t	i;
 
 	i = 0;
 	if (s)
@@ -46,10 +46,10 @@ char	*ft_strchr(const char *s, int c)
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char			*res;
-	unsigned int	res_len;
-	unsigned int	i;
-	unsigned int	j;
+	char	*res;
+	size_t	res_len;
+	size_t	i;
+	size_t	j;
 
 	res_len = ft_strlen((char *)s1) + ft_strlen((char *)s2);
 	res = (char *)malloc(res_len * sizeof(char) + 1);
@@ -69,7 +69,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 char	*ft_strdup(const char *s)
 {
 	char	*copy;
-	int		i;
+	size_t	i;
 
 	copy = (char *)malloc(sizeof(char) * (ft_strlen((char *)s) + 1));
 	if (copy == NULL)
